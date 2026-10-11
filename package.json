@@ -1,0 +1,21 @@
+{
+  "name": "mobs-org.dev",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The bilingual introduction to the MobS project.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/serve.mjs",
+    "check": "node scripts/check.mjs",
+    "deploy": "npm run build && npm run check && wrangler pages deploy dist --project-name mobs-org-dev --branch main",
+    "cf:whoami": "wrangler whoami",
+    "cf:login": "wrangler login --browser=false"
+  },
+  "devDependencies": {
+    "wrangler": "4.149.0"
+  }
+}
