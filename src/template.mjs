@@ -25,6 +25,10 @@ function members(t) {
   return `<ul class="members">${t.team.map((member) => `<li class="member"><h3>${escapeHtml(member.name)}</h3><p class="member-role">${escapeHtml(member.role)}${member.note ? `<span>${escapeHtml(member.note)}</span>` : ''}</p><a class="text-link" href="https://github.com/${member.github}">GitHub: @${escapeHtml(member.github)}${externalArrow}</a></li>`).join('')}</ul>`;
 }
 
+function projectInformation(t) {
+  return `<table class="project-information-table" aria-labelledby="project-information-label project-information-title"><tbody>${t.projectInformationRows.map(({ label, value, href }) => `<tr><th scope="row">${escapeHtml(label)}</th><td>${href ? `<a href="${escapeHtml(href)}">${escapeHtml(value)}</a>` : escapeHtml(value)}</td></tr>`).join('')}</tbody></table>`;
+}
+
 function head(t, lang, origin, cssFile, jsFile) {
   return `<head>
     <meta charset="utf-8">
@@ -104,6 +108,10 @@ ${head(t, lang, origin, cssFile, jsFile)}
       <p class="section-kicker">${t.teamKicker}</p>
       <div class="overview-intro"><h2 id="team-title">${lines(t.teamTitle)}</h2><div class="support-copy"><p class="section-lead">${escapeHtml(t.teamLead)}</p><p>${escapeHtml(t.contactLead)}</p><a class="contact-email" href="mailto:${contactEmail}">${contactEmail}</a></div></div>
       ${members(t)}
+    </section>
+    <section id="project-information" class="project-information wrap" aria-labelledby="project-information-label project-information-title">
+      <p id="project-information-label" class="section-kicker">${escapeHtml(t.projectInformationKicker)}</p>
+      <div class="overview-intro"><h2 id="project-information-title">MobS</h2>${projectInformation(t)}</div>
     </section>
   </main>
   <footer class="site-footer wrap"><div><a class="site-name" href="${t.path}">MobS</a><p>${escapeHtml(t.footerTagline)}</p><p class="name-origin">${escapeHtml(t.nameOrigin)}</p></div><div class="footer-links"><a href="mailto:${contactEmail}">${contactEmail}</a><a href="${projectUrl}">GitHub ${externalArrow}</a><a href="#top">${escapeHtml(t.backToTop)}<span aria-hidden="true"> ↑</span></a></div><div class="footer-bottom"><span>© ${new Date().getUTCFullYear()} MobS Project</span></div></footer>
